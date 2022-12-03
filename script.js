@@ -24,12 +24,11 @@ function buscarRepositorios(pagina, link){
     }
 
     link = link+`?page=${pagina}&per_page=4`;
-    console.log(link)
     $.get(link, ()  => {
     }).done(data => {
         preencherRepositoriosDoUsuario(data);
     }).fail(error => {
-        falhaAoBuscarDados(error);
+        falhaAoBuscarRepositorios(error);
     });
 }
 
@@ -50,9 +49,11 @@ function preencherRepositoriosDoUsuario(data){
         const linkRepositorio = data[index].html_url;
 
         const divConteudo = `<div class="repos-content">
-                                <p>${nomeRepositorio}</p>
-                                <p>Feito em ${linguagemRepositorio}</p>
-                                <a href="${linkRepositorio}" id="link-repositorio">Ver no GitHub</a>
+                                <p class="nome-repositorio">${nomeRepositorio}</p>
+                                <div>
+                                    <p>Feito em <span class="linguagem">${linguagemRepositorio}</span></p>
+                                    <a href="${linkRepositorio}" id="link-repositorio">Ver no GitHub</a>
+                                </div>
                             </div>`;
         $("#repos-container").append(divConteudo);
     }
@@ -64,8 +65,8 @@ function preencherRepositoriosDoUsuario(data){
         $("#paginacao-container").append(`<span class="link-paginacao" onClick="buscarNovosRepositoriosPorPagina(${i})">${i}</span>`);
     }
 
-    let paginacaoContainer = document.getElementById("paginacao-container");
-    paginacaoContainer.style.display = "block";
+    // let paginacaoContainer = document.getElementById("paginacao-container");
+    // paginacaoContainer.style.display = "block";
 }
 
 function buscarNovosRepositoriosPorPagina(pagina){
@@ -89,10 +90,19 @@ function preencherComDadosDoUsuario(dados){
     imagemElement.src = urlFotoUsuarioDado;
     nomeUsuarioElement.innerHTML = nomeUsuarioDado;
     qntRepositoriosElement.innerHTML = qntRepositorioPublicos;
-    repositoriosElement.style.display = "block";
+    repositoriosElement.style.display = "line";
     pLinkRepositoriosElement.dataset.linkRepositorios = urlRepositoriosDado;
 }
 
 function falhaAoBuscarDados(dados){
-    console.log(dados);
+    let imagemElement = document.getElementById("foto");
+    let nomeUsuarioElement  = document.getElementById("nome-usuario");
+
+    imagemElement.src = "./assets/404.webp";
+    nomeUsuarioElement.innerHTML = "404 - Usuário Não Encontrado"
+}
+
+function falhaAoBuscarRepositorios(error){
+    let nomeUsuarioElement  = document.getElementById("nome-usuario");
+    alert("Não foi possível buscar os repositórios do "+nomeUsuarioElement.innerHTML)
 }
