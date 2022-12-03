@@ -12,24 +12,22 @@
     <div class="container">
         <div class="content">
             <div class="top">
-                <p>Busque pelo usuário GitHub</p>
+                <p id="nome-usuario">Busque pelo usuário GitHub</p>
             </div>
             <div class="main">
-                <img src="" alt="Foto do avatar">
+                <img src="./assets/default.png" alt="Foto do avatar" id="foto">
                 <input type="text" id="input-search" placeholder="Digite um usuário">
                 <button>click</button>
             </div>
-            <div class="repos">
-                <div class="repo">
-                    <p>Nome do repositório</p>
-                    <p>Feito com Java</p>
-                    <a href="#">Ver no GitHub</a>
+            <div class="repos" style="display: none" id="repos">
+                <div class="repos-top">
+                    <p data-link-repositorios="" id="p-link-repositorios">Possui <span id="qnt-repositorios">40</span> repositórios</p>
+                    <img src="./assets/seta.png" class="seta" alt="" id="seta">
                 </div>
+                <div class="repo-container" id="repos-container"></div>
+                <div class="paginacao-container" style="display: none" id="paginacao-container"></div>
             </div>
-            
         </div>
     </div>
-
-    
 </body>
 </html>
