@@ -51,7 +51,7 @@ function preencherRepositoriosDoUsuario(data){
         const divConteudo = `<div class="repos-content">
                                 <p class="nome-repositorio">${nomeRepositorio}</p>
                                 <div>
-                                    <p>Feito em <span class="linguagem">${linguagemRepositorio}</span></p>
+                                    <p>Feito em <span class="linguagem">${linguagemRepositorio == null ? "Linguagem Não Definida" : linguagemRepositorio}</span></p>
                                     <a href="${linkRepositorio}" id="link-repositorio">Ver no GitHub</a>
                                 </div>
                             </div>`;
